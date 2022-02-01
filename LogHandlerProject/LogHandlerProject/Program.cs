@@ -6,8 +6,12 @@ namespace LogHandlerProject
     {
         static void Main(string[] args)
         {
-            var data = LogHandler.LogStringHandler(LogHandler.GetLogString("log.txt"));
+            var iterator = LogHandler.GetLogString("log.txt");
+            var data = LogHandler.LogStringHandler(iterator);
+
             LogHandler.WriteToFile(data, "Data.txt" );
+            LogHandler.ToXML(iterator, "log.xml");
+
         }
     }
 }
