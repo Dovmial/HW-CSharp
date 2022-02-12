@@ -194,5 +194,4 @@ namespace CustomStackProject
             return GetEnumerator();
         }
     }
-    
 }
