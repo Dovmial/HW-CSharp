@@ -25,7 +25,7 @@ using (Vocabulary vocabulary = new Vocabulary(type))
     while (isWork)
     {
         ui.SecondMenu();
-        choose = ui.getAnswear(minChoose = 0, maxChoose = 5);
+        choose = ui.getAnswear(minChoose = 0, maxChoose = 6);
         FunctionAction action = (FunctionAction)Enum.ToObject(typeof(FunctionAction), choose);
 
         switch (action)
