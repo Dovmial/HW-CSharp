@@ -1,0 +1,272 @@
+
+/*
+
+Напишите программу «Простейший файловый
+менеджер». Возможности:
+1. Смена текущего каталога (путь к текущему каталогу
+должен всегда отображаться на экране);
+2. Отображение всех подкаталогов текущего каталога;
+3. Отображение всех файлов текущего каталога;
+4. Создание нового каталога в текущем каталоге;
+5. Удаление уже существующего каталога (если каталог не
+пустой — то необходимо удалить все его содержимое).
+
+*/
+
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <Windows.h>
+#include <iomanip>
+
+namespace fs = std::filesystem;
+using ArgList = std::vector<std::string>;
+
+using fnCMD = bool (*)(const ArgList&);
+
+HANDLE consol = GetStdHandle(STD_OUTPUT_HANDLE);
+enum { LIGHT_GREEN = 10, WHITE = 15, YELLOW = 14, LIGHT_CYAN = 11 };
+
+struct sCommand {
+	std::string name_command;
+	std::string description;
+	fnCMD pFn;
+};
+
+using CMD_List = std::vector<sCommand>;
+enum {SIMPLE = 0,  CD, LS, MD, RM, RUN }; //номера команд (0 - прочие команды без аргументов)
+
+//текущий путь
+static std::string cur_path_str = fs::current_path().generic_string();
+
+void get_args(const std::string& input_str, ArgList& argList) {
+
+	argList.clear();
+	size_t left_idx{};
+	size_t right_idx{};
+	do {
+		left_idx = input_str.find_first_not_of(" \n\t", right_idx);
+		if (left_idx == std::string::npos) {
+			break;
+		}
+
+		if (input_str[left_idx] == '\"') {
+			++left_idx;
+			right_idx = input_str.find('\"', left_idx);
+
+			if (right_idx == std::string::npos) {
+				break;
+			}
+			if (right_idx - left_idx > 0) {
+				argList.push_back(input_str.substr(left_idx, right_idx - left_idx));
+			}
+			++right_idx;
+			continue;
+		}
+
+		right_idx = input_str.find_first_of(" \n\t", left_idx);
+		if (right_idx == std::string::npos) {
+			argList.push_back(input_str.substr(left_idx));
+			break;
+		}
+		else
+			argList.push_back(input_str.substr(left_idx, right_idx - left_idx));
+	} while (true);
+}
+
+//сопоставление аргументов с командами
+static uint16_t recurs_deep = 0; //Количество вызовов консолм
+int arg_to_command(const ArgList& arg_list, const CMD_List& cmd_list) {
+
+	size_t cmd_size = cmd_list.size();
+	size_t argList_size = arg_list.size();
+	if (argList_size == 0)
+		return 0;
+	if (argList_size == 1) {
+		if (arg_list.at(0) == "exit") {
+			exit(0);
+		}
+		if (arg_list.at(0) == "help") {
+			std::cout << "\thelp\t\tВызов справки\n";
+			std::cout << "\texit\t\tЗакрыть консоль\n";
+			std::cout << "\tpwd\t\tОтобразить текущий путь\n";
+			std::cout << "\tsrec\t\tКоличество рекурсивных вызовов консоли\n";
+			for (auto& i : cmd_list)
+				std::cout << '\t' << i.name_command << "\t\t" << i.description << '\n';
+			return 0;
+		}
+		if (arg_list.at(0) == "pwd") {
+			std::cout << "\n\t" << fs::current_path().generic_string() << '\n';
+			return 0;
+		}
+		if (arg_list.at(0) == "srec") {
+			std::cout << "\n\t" << recurs_deep<<'\n';
+			return 0;
+		}
+		
+	}
+
+	//вызов составных команд
+	size_t i = 0;
+	while (i < cmd_size) {
+		if (arg_list.at(0) == cmd_list.at(i).name_command) {
+			if (cmd_list.at(i).pFn(arg_list))
+				return i + 1;
+			else
+				return -1;
+		}
+		++i;
+	}
+
+	std::cerr << '\t' << arg_list.at(0) << " - unknown command\n";
+}
+
+void CMD(std::istream& is, const CMD_List& cmd_list) {
+	++recurs_deep;
+	if (recurs_deep > 5) {
+		std::cerr << "\n\tСлишком много вызовов консоли\n";
+		return;
+	}
+
+	ArgList argList;
+	std::string command_line;
+
+	do {
+		SetConsoleTextAttribute(consol, LIGHT_GREEN);
+		std::cout << cur_path_str << " >>> ";
+		SetConsoleTextAttribute(consol, WHITE);
+
+		std::getline(is, command_line); //считать строку
+		get_args(command_line, argList); //разбить на аргументы
+		if (is.good() && argList.size() == 0)
+			continue;
+
+		//сопоставить аргументы
+		int comand_code = arg_to_command(argList, cmd_list);
+		if (comand_code == RUN) { //запуск скрипта и файл проверен на существование
+			std::ifstream script(argList[1]);
+			CMD(script, cmd_list);
+
+			script.close();
+		}
+		if (is.eof()) {
+			--recurs_deep;
+			std::cout << "\n\tScript executed successfully\n\n";
+			return;
+		}
+		//TODO ifstream
+	} while (true);
+
+}
+
+
+bool CMD_ls(const ArgList& arg_list) { //содержимое директории
+
+	if (arg_list.size() > 1) {
+		std::cerr << "\n\t" << arg_list.at(1) << " - unknown argument\n";
+		return false;
+	}
+	size_t countD{}; //счетчик папок
+	size_t countf{}; //счетчик файлов
+	std::cout << "\n\tTYPE"
+		<< std::setw(15) << std::left << " BYTES"
+		<< "  NAME" << "\n\n";
+	for (auto& p : fs::directory_iterator(fs::current_path())) {
+
+		if (p.is_directory()) {
+			SetConsoleTextAttribute(consol, YELLOW);
+			std::cout << "\tD    " << std::setw(15) << ' ';
+			++countD;
+		}
+		else if (p.is_regular_file()) {
+			SetConsoleTextAttribute(consol, LIGHT_CYAN);
+			std::cout << "\tf    " << std::left << std::setw(15) << p.file_size();
+			++countf;
+		}
+		else {
+			std::cout << "\tO    " << std::setw(15) << ' ';
+		}
+		std::cout << p.path().filename().generic_string() << '\n';
+	}
+	SetConsoleTextAttribute(consol, YELLOW);
+	std::cout << "\n\t" << "Директорий: " << countD;
+	SetConsoleTextAttribute(consol, LIGHT_CYAN);
+	std::cout << "\t\t" << "Файлов: " << countf << "\n\n";
+	return true;
+}
+
+//смена текущего каталого
+bool CMD_cd(const ArgList& arg_list) {
+
+	if (arg_list.size() > 2) {
+		std::cerr << "\n\t" << arg_list.at(2) << " - unknown argument\n";
+		return false;
+	}
+	if (!fs::exists(arg_list.at(1))) {
+		std::cerr << "\n\t" << arg_list.at(1) << " - unknown path!\n";
+		return false;
+	}
+
+	 //обновить текущий путь
+	fs::current_path(arg_list.at(1));
+	cur_path_str = fs::current_path().generic_string();
+	return true;
+}
+
+//добавление папок
+bool CMD_md(const ArgList& arg_list) { //
+
+	size_t size = arg_list.size();
+	for (size_t i{ 1 }; i < size; ++i) {
+		fs::create_directories(arg_list.at(i));
+	}
+
+	return true;
+}
+
+//удаление папок с содержимым
+bool CMD_rm(const ArgList& arg_list) {
+	size_t size = arg_list.size();
+	for (size_t i{ 1 }; i < size; ++i) {
+		if (fs::exists(arg_list.at(i)))
+			fs::remove_all(arg_list[i]);
+		else {
+			std::cerr << "\n\t" << arg_list.at(i) << "  unknown path\n";
+			return false;
+		}
+
+	}
+	return true;
+}
+
+//проверка существования скрипта
+bool CMD_run(const ArgList& arg_list) {
+	if (arg_list.size() != 2) {
+		std::cerr << "\n\tНеверое количество аргументов\n";
+		return false;
+	}
+	if (!fs::exists(arg_list.at(1))) {
+		std::cerr << "\n\t file is not found!\n";
+		return false;
+	}
+	return true;
+}
+
+int main() {
+	
+	setlocale(LC_ALL, "rus");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	CMD_List cmd_list;
+	//составные команды
+	cmd_list.push_back({ "cd","Смена текущего каталога",  CMD_cd });		//1
+	cmd_list.push_back({ "ls","Отобразить содержимое каталога", CMD_ls });	//2-3
+	cmd_list.push_back({ "md","Создание нового каталога", CMD_md });		//4
+	cmd_list.push_back({ "rm", "Удаление каталога вместе со всем содержимым", CMD_rm });//5
+	cmd_list.push_back({ "run", "Запустить скрипт (run script1.txt)", CMD_run });
+
+	CMD(std::cin, cmd_list); //консоль
+}

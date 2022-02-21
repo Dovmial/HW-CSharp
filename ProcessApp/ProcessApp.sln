@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessApp", "ProcessApp\ProcessApp.csproj", "{78F3D5F6-06F5-4D96-BFC8-108B0302B1B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calc", "Calc\Calc.csproj", "{FE01B054-C196-4C04-9A7A-A86C0C7478B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindWord", "FindWord\FindWord.csproj", "{D4B58EB8-BCD3-4349-9694-AB5BB99FC8E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78F3D5F6-06F5-4D96-BFC8-108B0302B1B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78F3D5F6-06F5-4D96-BFC8-108B0302B1B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78F3D5F6-06F5-4D96-BFC8-108B0302B1B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78F3D5F6-06F5-4D96-BFC8-108B0302B1B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE01B054-C196-4C04-9A7A-A86C0C7478B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE01B054-C196-4C04-9A7A-A86C0C7478B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE01B054-C196-4C04-9A7A-A86C0C7478B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE01B054-C196-4C04-9A7A-A86C0C7478B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B58EB8-BCD3-4349-9694-AB5BB99FC8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B58EB8-BCD3-4349-9694-AB5BB99FC8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B58EB8-BCD3-4349-9694-AB5BB99FC8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B58EB8-BCD3-4349-9694-AB5BB99FC8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B7574B8-1782-4878-8B9E-8C3A2BC9F8D4}
+	EndGlobalSection
+EndGlobal
