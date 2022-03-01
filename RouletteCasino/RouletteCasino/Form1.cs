@@ -9,7 +9,6 @@ namespace RouletteCasino
         private List<Label> lblBets;
         private List<Label> lblNumbers;
 
-       
         public Form1(Random random)
         {
             InitializeComponent();
@@ -84,7 +83,7 @@ namespace RouletteCasino
 
         private void PlayerLoseMessage(Player player)
         {
-            Task.Run(() => {MessageBox.Show($"{player.Name} выбыл. Новый игрок"); });
+            Task.Run(() => { MessageBox.Show($"{player.Name} выбыл. Новый игрок"); });
         }
 
         private void PlayerWinMessage(Player player)
