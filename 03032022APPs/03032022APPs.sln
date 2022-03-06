@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingProgressBarsApp", "DancingProgressBarsApp\DancingProgressBarsApp.csproj", "{B2F39A7E-6658-4316-BCCE-775DAB074649}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseRidingApp", "HorseRidingApp\HorseRidingApp.csproj", "{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorseRidingApp", "HorseRidingApp\HorseRidingApp.csproj", "{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchWordApp", "SearchWordApp\SearchWordApp.csproj", "{5BAAEEAB-3AA5-4E82-A21C-0AF2277F9BD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BAAEEAB-3AA5-4E82-A21C-0AF2277F9BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BAAEEAB-3AA5-4E82-A21C-0AF2277F9BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BAAEEAB-3AA5-4E82-A21C-0AF2277F9BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BAAEEAB-3AA5-4E82-A21C-0AF2277F9BD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
