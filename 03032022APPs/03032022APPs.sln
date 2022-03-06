@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DancingProgressBarsApp", "DancingProgressBarsApp\DancingProgressBarsApp.csproj", "{B2F39A7E-6658-4316-BCCE-775DAB074649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseRidingApp", "HorseRidingApp\HorseRidingApp.csproj", "{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2F39A7E-6658-4316-BCCE-775DAB074649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2F39A7E-6658-4316-BCCE-775DAB074649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2F39A7E-6658-4316-BCCE-775DAB074649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2F39A7E-6658-4316-BCCE-775DAB074649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FF7699-1F2C-4C75-ACD8-21522F6AA5B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {709028C5-2A4B-455A-A48F-68B8516D28B4}
+	EndGlobalSection
+EndGlobal
