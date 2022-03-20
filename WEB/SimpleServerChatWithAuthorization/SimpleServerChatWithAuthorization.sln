@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiThreadWebAppClient", "MultiThreadWebAppClient\MultiThreadWebAppClient.csproj", "{2A9E215B-BC61-4D5C-A515-6E6B2391AA40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiThreadWebAppServer", "MultiThreadWebAppServer\MultiThreadWebAppServer.csproj", "{9809847A-F3CE-454C-A64E-6EC2B502CDB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A9E215B-BC61-4D5C-A515-6E6B2391AA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9E215B-BC61-4D5C-A515-6E6B2391AA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9E215B-BC61-4D5C-A515-6E6B2391AA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9E215B-BC61-4D5C-A515-6E6B2391AA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9809847A-F3CE-454C-A64E-6EC2B502CDB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9809847A-F3CE-454C-A64E-6EC2B502CDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9809847A-F3CE-454C-A64E-6EC2B502CDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9809847A-F3CE-454C-A64E-6EC2B502CDB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED489DF5-3685-4FAA-AB33-B2C0CCC9708D}
+	EndGlobalSection
+EndGlobal

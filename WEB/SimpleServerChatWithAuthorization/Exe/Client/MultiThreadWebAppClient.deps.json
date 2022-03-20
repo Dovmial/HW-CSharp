@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "MultiThreadWebAppClient/1.0.0": {
+        "runtime": {
+          "MultiThreadWebAppClient.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MultiThreadWebAppClient/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
