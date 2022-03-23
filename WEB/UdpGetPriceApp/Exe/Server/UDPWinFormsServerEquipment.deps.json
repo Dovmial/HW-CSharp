@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "UDPWinFormsServerEquipment/1.0.0": {
+        "dependencies": {
+          "LibraryUDP": "1.0.0"
+        },
+        "runtime": {
+          "UDPWinFormsServerEquipment.dll": {}
+        }
+      },
+      "LibraryUDP/1.0.0": {
+        "runtime": {
+          "LibraryUDP.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "UDPWinFormsServerEquipment/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LibraryUDP/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
