@@ -22,8 +22,8 @@ namespace UDPWinFormsClientEquipment
             DateTime now = DateTime.Now;
             if(TimeQueries.Count > 0)
             {
-                if(now > TimeQueries[0].AddHours(1.0))
-                    TimeQueries = TimeQueries.Where(t => t < now.AddHours(-1.0)).ToList();
+                if(now > TimeQueries[0].AddMinutes(1.0))
+                    TimeQueries = TimeQueries.Where(t => t > now.AddMinutes(-1.0)).ToList();
 
                 if (TimeQueries.Count == LimitQuery)
                     return false;

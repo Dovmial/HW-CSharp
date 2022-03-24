@@ -21,10 +21,16 @@ namespace UDPWinFormsClientEquipment
 
         private async void btnPrice_Click(object sender, EventArgs e)
         {
+            btnPrice.Enabled = false;
             if (!CheckPossibilityRequest())
+            {
+                btnPrice.Enabled = true;
                 return;
+            }
+                
             client.SendMessage(listBox1.SelectedItem?.ToString() ?? "Null");
             lblPrice.Text = $"{await client.ReceiveMessageAsync()} Rub";
+            btnPrice.Enabled = true;
         }
 
         private async Task GetListProductsAsync()
@@ -36,17 +42,28 @@ namespace UDPWinFormsClientEquipment
 
         private async void btnGetProducts_Click(object sender, EventArgs e)
         {
-            await GetListProductsAsync();
+            try
+            {
+                await GetListProductsAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            listBox1.Items.Clear();
             listBox1.Items?.AddRange(_goods.ToArray());
-            if(listBox1.Items?.Count > 0)
+            if (listBox1.Items?.Count > 0)
                 btnPrice.Enabled = true;
+
         }
 
         private bool CheckPossibilityRequest()
         {
             if (!_timeQueryHandler.AddNowTime())
             {
-                MessageBox.Show("No more than 10 requests per hour allowed. Try Later.");
+                var timeExpired = _timeQueryHandler.TimeQueries[0].AddMinutes(1.0) - DateTime.Now;
+                MessageBox.Show($"No more than 10 requests per minute allowed. " +
+                    $"Try Later.\n\t{-(int)timeExpired.TotalSeconds} sec");
                 return false;
             }
             return true;
